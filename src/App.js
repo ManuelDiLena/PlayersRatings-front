@@ -1,21 +1,17 @@
 import './App.css';
 import Menu from './components/Menu';
+import Player from './components/Player';
 
-function App(props) {
-
-    const { players } = props
-
+function App({ players }) {
     return (
         <div className='App'>
             <Menu />
-            <div className='container'>
-                <ul>
-                    {
-                        players.map(player => (
-                            <li key={player.id}>{player.name}</li>
-                        ))
-                    }
-                </ul>
+            <div className='container'> 
+                {
+                    players.map(player => (
+                        <Player key={player.id} player={player} />
+                    ))
+                }
             </div>
         </div>
     );

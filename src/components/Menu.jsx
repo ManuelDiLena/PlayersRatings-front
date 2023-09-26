@@ -9,7 +9,7 @@ export default function ButtonAppBar() {
 
     const menuStyle = {
         color: '#FFFFFF',
-        backgroundColor: '#607d8b'
+        backgroundColor: '#263238'
     };
 
     return (
