@@ -33,7 +33,7 @@ export default function Player({ player }) {
     }
 
     return (
-        <Card sx={{ width: 250, mt: 2, mr: 1, ml: 1, backgroundColor: '#eceff1' }}>
+        <Card sx={{ width: 250, height: 270, mt: 1.5, mr: 1, ml: 1, backgroundColor: '#eceff1' }}>
             <CardContent style={firstContent}>
                 <Typography variant='h6' color='text.secondary'>
                     {player.position}
