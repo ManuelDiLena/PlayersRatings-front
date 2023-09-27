@@ -49,7 +49,7 @@ export default function Player({ player }) {
                 <Typography sx={{ mb: 1.5 }} color='text.secondary'>
                     {player.nation}
                 </Typography>
-                <Typography variant='h6'>
+                <Typography>
                     {player.team}
                 </Typography>
             </CardContent>
