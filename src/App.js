@@ -3,7 +3,7 @@ import './App.css';
 import Menu from './components/Menu';
 import Player from './components/Player';
 import { Button, MenuItem, TextField, Typography } from '@mui/material';
-import axios from 'axios';
+import service from './services/players';
 
 function App() {
 
@@ -21,30 +21,34 @@ function App() {
 
     // Function that gets players from the server when starting the app
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/players')
-            .then(res => {
-                setPlayers(res.data)
+        service
+            .getPlayers()
+            .then(initialPlayers => {
+                setPlayers(initialPlayers)
             })
     }, [])
 
-    // Controller that captures all form values to create new players
+    // Controller to create new players
     const addPlayer = (e) => {
         e.preventDefault()
         const playerObject = {
+            id: players.length + 1,
             playerName: form.playerName,
             nation: form.nation,
             position: form.position,
             team: form.team,
             rating: form.rating,
-            id: players.length + 1,
         }
 
-        setPlayers(players.concat(playerObject))
-        setForm(initialForm)
+        service
+            .createPlayer(playerObject)
+            .then(returnedPlayer => {
+                setPlayers(players.concat(returnedPlayer))
+                setForm(initialForm)
+            })
     }
 
-    // Controller to handle changes in each input
+    // Controller to capture changes to the form
     const handleInputForm = (e) => {
         const { name, value } = e.target
         setForm({
