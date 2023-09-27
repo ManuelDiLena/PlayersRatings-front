@@ -1,0 +1,29 @@
+{
+    "players": [
+        {
+            "id": 1,
+            "playerName": "Lionel Messi",
+            "nation": "Argentina",
+            "position": "RW",
+            "team": "Inter Miami (CAL)",
+            "rating": 99
+        },
+        {
+            "id": 2,
+            "playerName": "Cristiano Ronaldo",
+            "nation": "Portugal",
+            "position": "ST",
+            "team": "Al Nassr (ARA)",
+            "rating": 95
+        },
+        {
+            "id": 3,
+            "playerName": "Kylian Mbappe",
+            "nation": "France",
+            "position": "ST",
+            "team": "Parissaint Germain (FRA)",
+            "rating": 91
+        }
+    ]
+}
+
