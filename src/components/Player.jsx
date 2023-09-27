@@ -44,7 +44,7 @@ export default function Player({ player }) {
             </CardContent>
             <CardContent>
                 <Typography variant='h5' component='div'>
-                    {player.name}
+                    {player.playerName}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color='text.secondary'>
                     {player.nation}

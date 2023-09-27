@@ -8,7 +8,7 @@ import App from './App';
 const players = [
     {
         id: 1,
-        name: 'Lionel Messi',
+        playerName: 'Lionel Messi',
         nation: 'Argentina',
         team: 'Inter Miami (CAL)',
         position: 'RW',
@@ -16,7 +16,7 @@ const players = [
     },
     {
         id: 2,
-        name: 'Cristiano Ronaldo',
+        playerName: 'Cristiano Ronaldo',
         nation: 'Portugal',
         team: 'Al Nassr (ARA)',
         position: 'ST',
