@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001/players'
+const baseUrl = 'http://localhost:3001/api/players'
 
 const getPlayers = () => {
     const request = axios.get(baseUrl)
