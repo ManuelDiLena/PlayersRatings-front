@@ -3,7 +3,8 @@ import './App.css';
 import Menu from './components/Menu';
 import Player from './components/Player';
 import { Button, MenuItem, TextField, Typography } from '@mui/material';
-import service from './services/players';
+import playersService from './services/players';
+import loginService from './services/login';
 
 function App() {
 
@@ -19,14 +20,38 @@ function App() {
 
     const [form, setForm] = useState(initialForm)
 
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [user, setUser] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
+
     // Function that gets players from the server when starting the app
     useEffect(() => {
-        service
+        playersService
             .getPlayers()
             .then(initialPlayers => {
                 setPlayers(initialPlayers)
             })
     }, [])
+
+    // Controller to capture changes to the login form
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        
+        try {
+            const user = await loginService.login({
+                username, password,
+            })
+            setUser(user)
+            setUsername('')
+            setPassword('')
+        } catch (ex) {
+            setErrorMessage('Wrong credentials')
+            setTimeout(() => {
+                setErrorMessage(null)
+            }, 5000)
+        }
+    }
 
     // Controller to create new players
     const addPlayer = (e) => {
@@ -40,7 +65,7 @@ function App() {
             rating: form.rating,
         }
 
-        service
+        playersService
             .createPlayer(playerObject)
             .then(returnedPlayer => {
                 setPlayers(players.concat(returnedPlayer))
@@ -103,12 +128,42 @@ function App() {
           value: 'ST',
           label: 'ST',
         },
-      ];
+    ];
+
+    // Function to render login form
+    const loginForm = () => (
+        <form onSubmit={handleLogin}>
+            <div>
+                username
+                <input 
+                    type='text'
+                    value={username}
+                    name='username'
+                    onChange={({ target }) => setUsername(target.value)}
+                />
+            </div>
+            <div>
+                password
+                <input 
+                    type='password'
+                    value={password}
+                    name='password'
+                    onChange={({ target }) => setPassword(target.value)}
+                />
+            </div>
+            <button type='submit'>Login</button>
+        </form>
+    )
 
     return (
         <div className='App'>
             <Menu />
             <div className='container'>
+                {
+                    user === null 
+                        ? loginForm() 
+                        : <p>{user.name} logged</p>
+                }
                 <div className='players'>
                     {
                         players.map(player => (
