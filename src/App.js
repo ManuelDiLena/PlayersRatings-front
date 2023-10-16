@@ -35,6 +35,16 @@ function App() {
             })
     }, [])
 
+    // Function to get user data from localStorage
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedPlayersAppUser')
+        if (loggedUserJSON) {
+            const user = JSON.parse(loggedUserJSON)
+            setUser(user)
+            playersService.setToken(user.token)
+        }
+    }, [])
+
     // Controller to capture changes to the login form
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -43,6 +53,11 @@ function App() {
             const user = await loginService.login({
                 username, password,
             })
+
+            window.localStorage.setItem(
+                'loggedPlayersAppUser', JSON.stringify(user)
+            )
+
             playersService.setToken(user.token)
             setUser(user)
             setUsername('')
