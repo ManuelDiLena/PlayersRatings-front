@@ -43,6 +43,7 @@ function App() {
             const user = await loginService.login({
                 username, password,
             })
+            playersService.setToken(user.token)
             setUser(user)
             setUsername('')
             setPassword('')
@@ -131,46 +132,16 @@ function App() {
         },
     ];
 
-    // Function to render login form
-    const loginForm = () => (
-        <form onSubmit={handleLogin}>
-            <div>
-                username
-                <input 
-                    type='text'
-                    value={username}
-                    name='username'
-                    onChange={({ target }) => setUsername(target.value)}
-                />
-            </div>
-            <div>
-                password
-                <input 
-                    type='password'
-                    value={password}
-                    name='password'
-                    onChange={({ target }) => setPassword(target.value)}
-                />
-            </div>
-            <button type='submit'>Login</button>
-        </form>
-    )
-
     return (
         <div className='App'>
             {
                 user === null 
                     ? 
-                <Login />
+                <Login username={username} password={password} setUsername={setUsername} setPassword={setPassword} handleLogin={handleLogin} />
                     :
                 <>
-                <Menu />
+                <Menu user={user} />
                 <div className='container'>
-                    {/* {
-                        user === null 
-                            ? loginForm() 
-                            : <p>{user.name} logged</p>
-                    } */}
                     <div className='players'>
                         {
                             players.map(player => (

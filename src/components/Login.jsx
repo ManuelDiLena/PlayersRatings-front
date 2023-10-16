@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Checkbox, Container, CssBaseline, FormControlLabel
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import * as React from 'react';
 
-export default function Login() {
+export default function Login({ username, password, setUsername, setPassword, handleLogin }) {
     return (
         <Container component='main' maxWidth='xs'>
             <CssBaseline />
@@ -16,7 +16,7 @@ export default function Login() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component='h1' variant='h5'>
-                    Sign In
+                    Sign In to Players Ratings
                 </Typography>
                 <Box component='form' noValidate sx={{ mt: 1 }}>
                     <TextField 
@@ -26,7 +26,9 @@ export default function Login() {
                         id='username'
                         label='Username'
                         name='username'
+                        value={username}
                         autoFocus
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <TextField 
                         margin='normal'
@@ -36,6 +38,8 @@ export default function Login() {
                         label='Password'
                         name='password'
                         type='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <FormControlLabel 
                         control={<Checkbox value='remember' color='primary' />}
@@ -46,6 +50,7 @@ export default function Login() {
                         fullWidth
                         variant='contained'
                         sx={{ mt: 3, mb: 2 }}
+                        onClick={handleLogin}
                     >
                         Sign In
                     </Button>
