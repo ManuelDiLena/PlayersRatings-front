@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-export default function Menu({ user }) {
+export default function Menu({ user, loginVisible }) {
 
     const menuStyle = {
         color: '#FFFFFF',
@@ -19,7 +19,17 @@ export default function Menu({ user }) {
                 <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
                     Players Ratings
                 </Typography>
-                <Button color='inherit'>{user.name}</Button>
+                {
+                    user ? 
+                    <Typography variant='h5'>{user.name}</Typography>
+                    :
+                    <Button 
+                        color='inherit'
+                        onClick={() => loginVisible(true)}
+                    >
+                        Login
+                    </Button>
+                }
             </Toolbar>
         </AppBar>
         </Box>

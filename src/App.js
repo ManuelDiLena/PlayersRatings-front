@@ -25,6 +25,7 @@ function App() {
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [loginVisible, setLoginVisible] = useState(false)
 
     // Function that gets players from the server when starting the app
     useEffect(() => {
@@ -147,15 +148,28 @@ function App() {
         },
     ];
 
+    // Function to show login form
+    const loginForm = () => {
+        const showLogin = { display: loginVisible ? '' : 'none' }
+
+        return (
+            <div style={showLogin}>
+                <Login 
+                    username={username} 
+                    password={password} 
+                    handleUsername={setUsername} 
+                    handlePassword={setPassword} 
+                    handleLogin={handleLogin} 
+                    loginVisible={setLoginVisible}
+                />
+            </div>
+        )
+    }
+
     return (
         <div className='App'>
-            {
-                user === null 
-                    ? 
-                <Login username={username} password={password} setUsername={setUsername} setPassword={setPassword} handleLogin={handleLogin} />
-                    :
-                <>
-                <Menu user={user} />
+                <Menu user={user} loginVisible={setLoginVisible} />
+                {   user === null && loginForm() }
                 <div className='container'>
                     <div className='players'>
                         {
@@ -216,11 +230,11 @@ function App() {
                             id='outlined-rating'
                             size='small'
                         />
-                        <Button variant='contained' type='submit'>Add Player</Button>
+                        <Button variant='contained' type='submit'>
+                            Add Player
+                        </Button>
                     </form>
                 </div>
-                </>
-            }
         </div>
     );
 }

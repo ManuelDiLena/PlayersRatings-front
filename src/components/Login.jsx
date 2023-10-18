@@ -1,60 +1,52 @@
-import { Avatar, Box, Button, Checkbox, Container, CssBaseline, FormControlLabel, TextField, Typography } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Box, Button, Container, CssBaseline, TextField } from '@mui/material';
 import * as React from 'react';
 
-export default function Login({ username, password, setUsername, setPassword, handleLogin }) {
+export default function Login({ username, password, handleUsername, handlePassword, handleLogin, loginVisible }) {
     return (
-        <Container component='main' maxWidth='xs'>
+        <Container component='main' sx={{ width: 1, display: 'flex', justifyContent: 'center' }}>
             <CssBaseline />
             <Box sx={{
-                marginTop: 8,
+                width: '75%',
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
                 alignItems: 'center',
             }}>
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component='h1' variant='h5'>
-                    Sign In to Players Ratings
-                </Typography>
-                <Box component='form' noValidate sx={{ mt: 1 }}>
-                    <TextField 
-                        margin='normal'
-                        required
-                        fullWidth
-                        id='username'
-                        label='Username'
-                        name='username'
-                        value={username}
-                        autoFocus
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField 
-                        margin='normal'
-                        required
-                        fullWidth
-                        id='password'
-                        label='Password'
-                        name='password'
-                        type='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <FormControlLabel 
-                        control={<Checkbox value='remember' color='primary' />}
-                        label='Remember me'
-                    />
-                    <Button
-                        type='submit'
-                        fullWidth
-                        variant='contained'
-                        sx={{ mt: 3, mb: 2 }}
-                        onClick={handleLogin}
-                    >
-                        Sign In
-                    </Button>
-                </Box>
+                <TextField 
+                    margin='normal'
+                    required
+                    id='username'
+                    label='Username'
+                    name='username'
+                    value={username}
+                    autoFocus
+                    onChange={(e) => handleUsername(e.target.value)}
+                />
+                <TextField 
+                    margin='normal'
+                    required
+                    id='password'
+                    label='Password'
+                    name='password'
+                    type='password'
+                    value={password}
+                    onChange={(e) => handlePassword(e.target.value)}
+                />
+                <Button
+                    type='submit'
+                    variant='contained'
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={handleLogin}
+                >
+                    Sign In
+                </Button>
+                <Button
+                    variant='contained'
+                    sx={{ mt: 3, mb: 2 }}
+                    onClick={() => loginVisible(false)}
+                >
+                    Cancel
+                </Button>
             </Box>
         </Container>
     );
