@@ -11,16 +11,6 @@ function App() {
 
     const [players, setPlayers] = useState([])
 
-    const initialForm = {
-        playerName: '',
-        nation: '',
-        position: '',
-        team: '',
-        rating: '',
-    }
-
-    const [form, setForm] = useState(initialForm)
-
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
@@ -72,81 +62,13 @@ function App() {
     }
 
     // Controller to create new players
-    const addPlayer = (e) => {
-        e.preventDefault()
-        const playerObject = {
-            id: players.length + 1,
-            playerName: form.playerName,
-            nation: form.nation,
-            position: form.position,
-            team: form.team,
-            rating: form.rating,
-        }
-
+    const addPlayer = (playerObject) => {
         playersService
             .createPlayer(playerObject)
             .then(returnedPlayer => {
                 setPlayers(players.concat(returnedPlayer))
-                setForm(initialForm)
             })
     }
-
-    // Controller to capture changes to the form
-    const handleInputForm = (e) => {
-        const { name, value } = e.target
-        setForm({
-            ...form,
-            [name]: value,
-        })
-    }
-
-    // Object to show positions in the form select
-    const positions = [
-        {
-          value: 'GK',
-          label: 'GK',
-        },
-        {
-          value: 'CB',
-          label: 'CB',
-        },
-        {
-          value: 'RB',
-          label: 'RB',
-        },
-        {
-          value: 'LB',
-          label: 'LB',
-        },
-        {
-          value: 'CDM',
-          label: 'CDM',
-        },
-        {
-          value: 'CM',
-          label: 'CM',
-        },
-        {
-          value: 'CAM',
-          label: 'CAM',
-        },
-        {
-          value: 'RW',
-          label: 'RW',
-        },
-        {
-          value: 'LW',
-          label: 'LW',
-        },
-        {
-          value: 'CF',
-          label: 'CF',
-        },
-        {
-          value: 'ST',
-          label: 'ST',
-        },
-    ];
 
     // Function to show login form
     const loginForm = () => {
@@ -182,10 +104,7 @@ function App() {
                         user !== null 
                         && 
                         <PlayerForm 
-                            addPlayer={addPlayer}
-                            form={form}
-                            handleInputForm={handleInputForm}
-                            positions={positions}
+                            createPlayer={addPlayer}
                         />
                     }
                 </div>
