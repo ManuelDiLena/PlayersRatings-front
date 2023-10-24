@@ -34,6 +34,7 @@ export default function Login({ username, password, handleUsername, handlePasswo
                 />
                 <Button
                     type='submit'
+                    id='btnLogin'
                     variant='contained'
                     sx={{ mt: 3, mb: 2 }}
                     onClick={handleLogin}
